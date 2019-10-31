@@ -246,12 +246,12 @@ app.get('/energy-type/:selected_energy_type', (req, res) => {
 		{
 			previous = 4;
 		}
-		else if(state_position == 4)
+		else if(energy_position == 4)
 		{
 			next = 0;
 		}	
 			db.all("SELECT * FROM Consumption ORDER BY state_abbreviation,year", (err, rows) => {
-				console.log(rows);
+				//console.log(rows);
 				for(j = 0; j < rows.length; j++)
 				{
 					if(energy_count["state_abbreviation"] == undefined)
@@ -281,13 +281,21 @@ app.get('/energy-type/:selected_energy_type', (req, res) => {
 					total = 0;
 				}
 				
+			temp = energy_type;
+			if(temp === "natural_gas")
+			{
+				temp = "natural gas";
+			}
+			else
+			{
+				temp = energy_type;
+			}
 			
-				
 			template = template.toString();			
 			template = template.replace("US Energy Consumption", "US " + energy_type + " Consumption");
-			template = template.replace("energy_type", "energy_type = " + "'" + energy_type + "'");		
+			template = template.replace("energy_type", "energy_type = " + "'" + temp + "'");		
 			template = template.replace("energy_counts","energy_counts = " +  JSON.stringify(energy_count));
-			template = template.replace('noimage.jpg" alt="No Image"', 'energy.jpg"' + ' alt=" lightning "');
+			template = template.replace('noimage.jpg" alt="No Image"', energy_type + '.jpg"' + ' alt="' + energy_type + '"');
 			template = template.replace('href="">XX',"href='" + energy[previous] + "'" + '">' + energy[previous]); 
 			template = template.replace('href="">XX',"href='" + energy[next] + "'" + '">' + energy[next]); 
 			template = template.replace("<!-- Data to be inserted here -->", table);			
@@ -296,6 +304,7 @@ app.get('/energy-type/:selected_energy_type', (req, res) => {
 		});
 	
 	}).catch((err) => {
+		console.log(err);
 		Write404Error(res);
 	});
 });
