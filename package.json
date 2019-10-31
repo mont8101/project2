@@ -1,0 +1,28 @@
+{
+    "name": "dynamic-webserver",
+    "version": "0.0.0",
+    "description": "Dynamic Web Server using Node JS",
+    "author": {
+        "name": "Ben Montgomery", 	
+        "email": "Mont8101@stthomas.edu" 
+    },
+    "contributors": [
+        {
+            "name": "Galvin Ho", 
+            "email": "Ho004311@stthomas.edu"
+        },
+        {
+            "name": "Ben Montgomery",
+            "email": "Mont8101@stthomas.edu"
+        }
+    ],
+    "main": "server.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mont8101/project2"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "sqlite3": "^4.1.0"
+    }
+}
